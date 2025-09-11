@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Faz o app ocupar toda altura da tela */
+}
+
+.main-content {
+  display: flex;
+  flex: 1; /* Preenche o espaço entre header e footer */
+}
+
+.content-area {
+  flex: 1; /* Area central ocupa todo espaço restante */
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Permite os cards quebrarem linha */
+  gap: 16px; /* Espaçamento entre os cards */
+  justify-content: center; /* Centraliza os cards horizontalmente */
+}
