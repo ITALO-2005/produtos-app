@@ -25,7 +25,7 @@ function ProductCard({ name, price, description }) {
       <p>{description}</p>
       
       {/* Botão para adicionar itens sempre visível */}
-      <button onClick={handleAddItem}>Adicionar o Carrinho</button>
+      <button onClick={handleAddItem}>Add Carrinho</button>
 
       {/* 4. Renderização condicional: só mostra o bloco abaixo se quantity > 0 */}
       {quantity > 0 && (
