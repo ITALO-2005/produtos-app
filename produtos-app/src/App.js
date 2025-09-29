@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
@@ -13,20 +13,58 @@ function App() {
     { id: 4, name: "Teclado Mecânico", price: 450, description: "Teclado mecânico RGB para gamers" }
   ];
 
+  const [cart, setCart] = useState([]);
+  const handleAddToCart = (productToAdd) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === productToAdd.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === productToAdd.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...productToAdd, quantity: 1 }];
+    });
+  };
+
+  const handleRemoveFromCart = (productToRemove) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === productToRemove.id);
+      if (existingProduct && existingProduct.quantity > 1) {
+        return prevCart.map((item) =>
+          item.id === productToRemove.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        );
+      }
+      return prevCart.filter((item) => item.id !== productToRemove.id);
+    });
+  };
+
+  const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
   return (
     <div className="app-container">
-      <Header />
+      {/* Passa o total para o componente Header */}
+      <Header totalPrice={totalPrice} />
       <div className="main-content">
         <Sidebar />
         <div className="content-area">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              price={product.price}
-              description={product.description}
-            />
-          ))}
+          {products.map((product) => {
+            const cartItem = cart.find(item => item.id === product.id);
+            return (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                description={product.description}
+                cartItem={cartItem}
+                onAddItem={() => handleAddToCart(product)}
+                onRemoveItem={() => handleRemoveFromCart(product)}
+              />
+            )
+          })}
         </div>
       </div>
       <Footer />

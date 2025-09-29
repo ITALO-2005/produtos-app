@@ -6,19 +6,19 @@ body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Faz o app ocupar toda altura da tela */
+  height: 100vh; 
 }
 
 .main-content {
   display: flex;
-  flex: 1; /* Preenche o espaço entre header e footer */
+  flex: 1; 
 }
 
 .content-area {
-  flex: 1; /* Area central ocupa todo espaço restante */
+  flex: 1; 
   padding: 20px;
   display: flex;
-  flex-wrap: wrap; /* Permite os cards quebrarem linha */
-  gap: 16px; /* Espaçamento entre os cards */
-  justify-content: center; /* Centraliza os cards horizontalmente */
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center; 
 }
